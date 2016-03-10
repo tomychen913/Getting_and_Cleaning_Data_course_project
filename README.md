@@ -108,9 +108,50 @@ alldata <- rbind(testdataset, traindataset)
 alldata <- tbl_df(alldata)
 ```
 
-###Stpe 2: Extracts only the measurements on the mean and standard deviation
+###Stpe 2: Extracts measurements names(mean and std)
+
+Read all features name to __allfeatures__.  
+Create MeanRefer data frame:
+|| MeanIndex || MeanName ||
+```
+activitylabels <- read.table("./UCI HAR Dataset/activity_labels.txt")
+allfeatures <- read.table("./UCI HAR Dataset/features.txt")
+MeanIndex <- as.numeric(grep("mean\\(\\)",allfeatures$V2))
+MeanName <- grep("mean\\(\\)",allfeatures$V2,value=TRUE)
+MeanRefer <- data.frame(cbind(MeanIndex,MeanName))
+MeanRefer <- mutate(MeanRefer,MeanIndex = extract_numeric(MeanIndex))
+```
+Create StdRefer data frame:
+|| StdIndex || StdName ||
+```
+StdIndex <- grep("std\\(\\)",allfeatures$V2)
+StdName <- grep("std\\(\\)",allfeatures$V2,value=TRUE)
+StdRefer <- data.frame(cbind(StdIndex,StdName))
+StdRefer <- mutate(StdRefer, StdIndex = extract_numeric(StdIndex))
+```
+Conbine __MeanRefer__ and __StdRefer__.  
+```
+ExtractRefer <- data.frame(rbind(as.matrix(MeanRefer),as.matrix(StdRefer)))
+ExtractRefer <- mutate(ExtractRefer, MeanIndex = extract_numeric(MeanIndex))
+ExtractRefer <- arrange(ExtractRefer, MeanIndex)
+names(ExtractRefer) <- c("index", "names")
+```
+Filter __alldata__ value to __ExtractDone__.  
+```
+ExtractDone <- select(alldata, as.vector(ExtractRefer$index))
+names(ExtractDone) <- ExtractRefer$names
+ExtractDone <- cbind(AllId, AllLabel,ExtractDone)
+```
 
 ###Stpe 3: Replace descriptive activity names
+
+The __ExtractDone__ stored the descriptive nemes of activity.  
+Use sapply to looking for and replace it.  
+```
+ReplaceFullName <- function(x){activitylabels[x,2]}
+ExtractDone <- mutate(ExtractDone, activity = sapply(ExtractDone$activity,
+                                                  ReplaceFullName))
+```
 
 ###Stpe 4: Appropriately variable names
 
