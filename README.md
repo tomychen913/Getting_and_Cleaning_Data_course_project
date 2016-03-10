@@ -165,7 +165,7 @@ names(ExtractDone) <- gsub("BodyBody", "Body", names(ExtractDone))
 names(ExtractDone) <- gsub("Body", "Body-", names(ExtractDone))
 names(ExtractDone) <- gsub("Gravity", "Gravity-", names(ExtractDone))
 names(ExtractDone) <- gsub("mean\\(\\)", "mean", names(ExtractDone))
-names(ExtractDone) <- gsub("std\\(\\)", "std", names(ExtractDone))
+names(ExtractDone) <- gsub("std\\(\\)", "standarddeviation", names(ExtractDone))
 ```
 
 ###Stpe 5: Average of each variable
