@@ -15,7 +15,7 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
 
 ###Variable Description
 * __subject__ - _The identity number of test subject_  
-  * value: 1 to 31(numeric)
+  * value: 1 to 30(numeric)
 * __activity__ - _Test subject's activity type_  
   * value: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
 * __sampling__ - _The measurement mode_
