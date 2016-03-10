@@ -14,17 +14,18 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
  $ average  : num  0.222 0.261 0.279 0.277 0.289 ...  
 
 ###Variable Description
-* subject - The identity number of test subject  
-* activity - Test subject's activity type  
+* __subject__ - _The identity number of test subject_  
+  * value: 1 to 31(numeric)
+* __activity__ - _Test subject's activity type_  
   * value: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
-* sampling - The measurement mode
+* __sampling__ - _The measurement mode_
   * value: time, frequency
-* source - Body and gravity acceleration signals
+* __source__ - _Body and gravity acceleration signals_
   * value: body, gravity
-* method - Eigenvalue of acceleration or gyroscope, including jerk and magnitude calculation
+* __method__ - _Eigenvalue of acceleration or gyroscope, including jerk and magnitude calculation_
   * value: Accelerometer, AccelerometerJerk, Gyroscope, GyroscopeJerk, AccelerometerMagnitude, AccelerometerJerkMagnitude, GyroscopeMagnitude, GyroscopeJerkMagnitude    
-* statistic - Statistic method(mean and standard deviation)
+* __statistic__ - _Statistic method(mean and standard deviation)_
   * vlaue: mean, std
-* axis - The Dimension of acceleration sensor
+* __axis__ - _The Dimension of acceleration sensor_
   * value: X, Y, Z, NA 
-* average - The summarize of mean from group by subject and activity
+* __average__ - _The summarize of mean from group by subject and activity_
