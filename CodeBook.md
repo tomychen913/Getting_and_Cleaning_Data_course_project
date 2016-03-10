@@ -22,9 +22,9 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
 * source - Body and gravity acceleration signals
   * value: body, gravity
 * method - Eigenvalue of acceleration or gyroscope, including jerk and magnitude calculation
-  * 
+  * value: Accelerometer, AccelerometerJerk, Gyroscope, GyroscopeJerk, AccelerometerMagnitude, AccelerometerJerkMagnitude, GyroscopeMagnitude, GyroscopeJerkMagnitude    
 * statistic - Statistic method(mean and standard deviation)
   * vlaue: mean, std
 * axis - The Dimension of acceleration sensor
   * value: X, Y, Z, NA 
-* average - The summarize of mean group by subject and activity
+* average - The summarize of mean from group by subject and activity
