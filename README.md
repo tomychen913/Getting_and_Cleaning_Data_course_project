@@ -16,15 +16,15 @@ First, set working directory and file download url
 setwd("/Users/Tomy/Documents/course_project")
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 ```  
-download and unzip file
+Download and unzip file
 ```
 if(!file.exists("UCI HAR Dataset.zip")){download.file(fileUrl, 
                                               "UCI HAR Dataset.zip", method="curl")}
 if(!file.exists("./UCI HAR Dataset")){unzip("UCI HAR Dataset.zip")}
 ```
-make sure the directory structure like this
+Make sure the directory structure like this
 ```
-dir(recursive =TRUE)
+dir(recursive = TRUE)
  [1] "run_analysis.R"                                              
  [2] "UCI HAR Dataset.zip"                                         
  [3] "UCI HAR Dataset/activity_labels.txt"                         
@@ -56,3 +56,62 @@ dir(recursive =TRUE)
 [29] "UCI HAR Dataset/train/X_train.txt"                           
 [30] "UCI HAR Dataset/train/y_train.txt"
 ```
+###Stpe 1: merge data set
+This step we merges the training and the test sets to create one data set.  
+The tip is assign colClasses to speed up read.table function.  
+Read test data set by column,and cbind them.  
+|| testsubjectid ||  testdatasetlabel || testdataset
+```
+tab5rows <- read.table("./UCI HAR Dataset/test/subject_test.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+testsubjectid <- read.table("./UCI HAR Dataset/test/subject_test.txt", colClasses = classes)
+tab5rows <- read.table("./UCI HAR Dataset/test/y_test.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+testdatasetlabel <- read.table("./UCI HAR Dataset/test/y_test.txt", colClasses = classes)
+tab5rows <- read.table("./UCI HAR Dataset/test/X_test.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+testdataset <- read.table("./UCI HAR Dataset/test/X_test.txt", colClasses = classes)
+testdf <- cbind(testsubjectid, testdatasetlabel, testdataset)
+```
+Read train data set by column,and cbind them.  
+|| trainsubjectid ||  traindatasetlabel || traindataset  
+
+```
+tab5rows <- read.table("./UCI HAR Dataset/train/subject_train.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+trainsubjectid <- read.table("./UCI HAR Dataset/train/subject_train.txt", colClasses = classes)
+tab5rows <- read.table("./UCI HAR Dataset/train/y_train.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+traindatasetlabel <- read.table("./UCI HAR Dataset/train/y_train.txt", colClasses = classes)
+tab5rows <- read.table("./UCI HAR Dataset/train/X_train.txt", nrows = 5)
+classes <- sapply(tab5rows, class)
+traindataset <- read.table("./UCI HAR Dataset/train/X_train.txt", colClasses = classes)
+traindf <- cbind(trainsubjectid, traindatasetlabel, traindataset)
+```
+Now, we can combine test and train data set. And assign descriptive names.  
+|| testsubjectid  ||  
+|| trainsubjectid ||
+```
+AllId <-rbind(testsubjectid, trainsubjectid)
+names(AllId)<- "subject"
+```
+|| testdatasetlabel  ||  
+|| traindatasetlabel ||
+```
+AllLabel <- rbind(testdatasetlabel, traindatasetlabel)
+names(AllLabel) <- "activity"
+```
+|| testdataset  ||  
+|| traindataset ||
+```
+alldata <- rbind(testdataset, traindataset)
+alldata <- tbl_df(alldata)
+```
+
+###Stpe 2: Extracts only the measurements on the mean and standard deviation
+
+###Stpe 3: Replace descriptive activity names
+
+###Stpe 4: Appropriately variable names
+
+###Stpe 5: Average of each variable
