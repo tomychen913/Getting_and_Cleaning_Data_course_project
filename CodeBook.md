@@ -3,6 +3,7 @@
 This code book descripts the variables of tidydata.txt
 
 ###Structure of data set
+```
 Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:  
  $ subject  : int  1 1 1 1 1 1 2 2 2 2 ...  
  $ activity : Factor w/ 6 levels "LAYING","SITTING",..: 1 2 3 4 5 6 1 2 3 4 ...  
@@ -12,7 +13,7 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
  $ statistic: Factor w/ 2 levels "mean","StandardDeviation": 1 1 1 1 1 1 1 1 1 1 ...  
  $ axis     : Factor w/ 3 levels "X","Y","Z": 1 1 1 1 1 1 1 1 1 1 ...  
  $ average  : num  0.222 0.261 0.279 0.277 0.289 ...  
-
+```
 ###Variable Description
 * __subject__ - _The identity number of test subject_  
   * value: 1 to 30(numeric)
@@ -28,4 +29,4 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
   * vlaue: mean, std
 * __axis__ - _The Dimension of acceleration sensor_
   * value: X, Y, Z, NA 
-* __average__ - _The summarize of mean from group by subject and activity_
+* __average__ - _The summarize mean of measurements from group by subject and activity_
