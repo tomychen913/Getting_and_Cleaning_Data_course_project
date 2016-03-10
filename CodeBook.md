@@ -18,7 +18,7 @@ Classes ‘tbl_df’, ‘tbl’ and 'data.frame':	11880 obs. of  8 variables:
   * value: 1 to 30(numeric)
 * __activity__ - _Test subject's activity type_  
   * value: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING
-* __sampling__ - _The measurement mode_
+* __sampling__ - _The measurement domain_
   * value: time, frequency
 * __source__ - _Body and gravity acceleration signals_
   * value: body, gravity
