@@ -178,15 +178,6 @@ AvgExtractDone <- gather(AvgExtractDone, "key", "average", 3:68)
 AvgExtractDone <- separate(AvgExtractDone, key, into=c("sampling","source",
                                                        "method","statistic","axis"), sep="-")
 ```
-Convert characher to factor.  
-```R
-AvgExtractDone <- mutate(AvgExtractDone, sampling = as.factor(sampling))
-AvgExtractDone <- mutate(AvgExtractDone, source = as.factor(source))
-AvgExtractDone <- mutate(AvgExtractDone, method = as.factor(method))
-AvgExtractDone <- mutate(AvgExtractDone, statistic = as.factor(statistic))
-AvgExtractDone <- mutate(AvgExtractDone, axis = as.factor(axis))
-```
-
 Export txt file, named __tidydata.txt__.
 ```R
 write.table(AvgExtractDone, file = "tidydata.txt",row.name=FALSE)
