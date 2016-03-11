@@ -11,12 +11,12 @@ The experiments have been carried out with a group of 30 volunteers within an ag
 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.  
 
 ##R script comment
-First, set working directory and file download url  
+First, set up working directory and file download URL  
 ```R
 setwd("/Users/Tomy/Documents/course_project")
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 ```  
-Download and unzip file
+Download and unzip the file
 ```R
 if(!file.exists("UCI HAR Dataset.zip")){download.file(fileUrl, 
                                               "UCI HAR Dataset.zip", method="curl")}
@@ -57,9 +57,9 @@ dir(recursive = TRUE)
 [30] "UCI HAR Dataset/train/y_train.txt"
 ```
 ###Stpe 1: merge data set
-This step we merges the training and the test sets to create one data set.  
-The tip is assigning colClasses to speed up read.table function.  
-Read test data set by column,and cbind them.  
+At this step we merges the training and the test sets to create one new data set.  
+The tip here is to speed up read.table function by assigning colClasses.  
+Read the test data set by column,and cbind them.  
 || testsubjectid ||  testdatasetlabel || testdataset
 ```R
 tab5rows <- read.table("./UCI HAR Dataset/test/subject_test.txt", nrows = 5)
@@ -73,7 +73,7 @@ classes <- sapply(tab5rows, class)
 testdataset <- read.table("./UCI HAR Dataset/test/X_test.txt", colClasses = classes)
 testdf <- cbind(testsubjectid, testdatasetlabel, testdataset)
 ```
-Read train data set by column,and cbind them.  
+Read the train data set by column,and cbind them.  
 || trainsubjectid ||  traindatasetlabel || traindataset  
 
 ```R
@@ -88,7 +88,7 @@ classes <- sapply(tab5rows, class)
 traindataset <- read.table("./UCI HAR Dataset/train/X_train.txt", colClasses = classes)
 traindf <- cbind(trainsubjectid, traindatasetlabel, traindataset)
 ```
-Now, we can combine test and train data set. And assign descriptive names.  
+Now, we can combine test and train data set together, and assign descriptive names to each column.  
 || testsubjectid  ||  
 || trainsubjectid ||
 ```R
@@ -145,7 +145,7 @@ ExtractDone <- cbind(AllId, AllLabel,ExtractDone)
 
 ###Stpe 3: Replace descriptive activity names
 
-The __ExtractDone__ stored the descriptive nemes of activity.  
+The __ExtractDone__ stored the descriptive names of activity.  
 Use sapply to looking for and replace it.  
 ```R
 ReplaceFullName <- function(x){activitylabels[x,2]}
@@ -154,7 +154,7 @@ ExtractDone <- mutate(ExtractDone, activity = sapply(ExtractDone$activity,
 ```
 
 ###Stpe 4: Appropriately variable names
-Use gsub substitute text.
+Use gsub to substitute the text.
 ```R
 names(ExtractDone) <- gsub("^t", "time-", names(ExtractDone))
 names(ExtractDone) <- gsub("^f", "frequency-", names(ExtractDone))
@@ -169,7 +169,7 @@ names(ExtractDone) <- gsub("std\\(\\)", "standarddeviation", names(ExtractDone))
 ```
 
 ###Stpe 5: Average of each variable
-Tidying __ExtractDone__ to calculate mean of each measurements.  
+Tidy __ExtractDone__ to calculate the mean of each measurements.  
 Store result in __AvgExtractDone__,and separate each variable.  
 ```R
 AvgExtractDone <- tbl_df(aggregate(. ~subject + activity, data=ExtractDone, FUN=mean))
